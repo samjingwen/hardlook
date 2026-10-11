@@ -11,6 +11,7 @@ import { review } from '../skills/hardlook/scripts/review.mjs';
 import { decodeReport, pipelineReport, validateReport } from '../skills/hardlook/scripts/report.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
+const packageVersion = JSON.parse(await fs.readFile(path.join(root, 'package.json'), 'utf8')).version;
 const cli = path.join(root, 'skills/hardlook/scripts/hardlook.mjs');
 const hosts = ['opencode', 'claude-code', 'codex', 'cursor', 'pi'];
 
@@ -249,7 +250,7 @@ test('installed, relocated fat bundle reviews without the source checkout and re
   const nested = await execute(process.execPath, [installedCLI, 'install', '--dest', path.join(relocated, 'nested')], { allowFailure: true });
   assert.equal(nested.code, 2);
   await assert.rejects(fs.access(path.join(relocated, 'nested')));
-  assert.equal((JSON.parse(await fs.readFile(path.join(relocated, 'manifest.json'), 'utf8'))).version, '0.1.0');
+  assert.equal((JSON.parse(await fs.readFile(path.join(relocated, 'manifest.json'), 'utf8'))).version, packageVersion);
   for (const host of [...hosts, 'no-mistakes']) await fs.access(path.join(relocated, 'adapters', host, 'instructions.md'));
 });
 
