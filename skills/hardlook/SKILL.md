@@ -1,6 +1,8 @@
 ---
 name: hardlook
 description: Use when asked to review code, a diff, a branch, or a PR; find bugs or blind spots; perform an independent multi-model review; or audit maintainability. Use "hardlook", "hardlook deep", or "hardlook structure". Return evidence-backed findings. Hand fixes and delivery decisions back to the caller or its active pipeline.
+metadata:
+  opencode/slash: "true"
 ---
 
 # Hardlook

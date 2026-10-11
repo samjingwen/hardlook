@@ -17,6 +17,9 @@ Choose your harness in the installer, then start a new session and ask:
 - **Hardlook deep** — independent reviewers and contextual lead judgment.
 - **Hardlook structure** — a targeted maintainability audit.
 
+In OpenCode, quit and restart after installation or updates to reload the slash
+menu, then use `/hardlook`, `/hardlook deep`, or `/hardlook structure`.
+
 Hardlook reviews and recommends. Your agent or existing pipeline owns fixes.
 
 Targets **OpenCode, Cursor, Pi, Claude Code, and Codex**. See the
