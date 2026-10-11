@@ -17,8 +17,19 @@ Choose your harness in the installer, then start a new session and ask:
 - **Hardlook deep** — independent reviewers and contextual lead judgment.
 - **Hardlook structure** — a targeted maintainability audit.
 
-In OpenCode, quit and restart after installation or updates to reload the slash
-menu, then use `/hardlook`, `/hardlook deep`, or `/hardlook structure`.
+For a global OpenCode install, register the bundled slash-menu command too:
+
+```sh
+npx skills add samjingwen/hardlook --skill hardlook --global --agent opencode
+node "$HOME/.agents/skills/hardlook/scripts/hardlook.mjs" install-opencode-command \
+  --dest "$HOME/.config/opencode/commands/hardlook.md"
+```
+
+Then quit and restart OpenCode and use `/hardlook`, `/hardlook deep`, or
+`/hardlook structure`. OpenCode 1.19.0 hides skill-backed entries in slash
+autocomplete; the standard command provides menu visibility. See the
+[bundled OpenCode instructions](skills/hardlook/adapters/opencode/instructions.md)
+for project-local setup and the `/skills` picker.
 
 Hardlook reviews and recommends. Your agent or existing pipeline owns fixes.
 

@@ -58,6 +58,8 @@ review using its own read/search tools and the bundled protocol.
   The first selector is also the lead unless `--lead <harness>:<model>` is set.
 - `... install --dest <exact-skill-directory>`: copy the complete bundle to an
   unused destination. Existing installations are never overwritten.
+- `... install-opencode-command --dest <commands/hardlook.md>`: install the
+  bundled OpenCode slash-menu command. See `adapters/opencode/instructions.md`.
 
 Run `... --help` for exact flags. Missing CLIs or credentials require the user
 to install/authenticate their harness. Never retrieve or print credentials.

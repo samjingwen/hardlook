@@ -23,6 +23,26 @@ The package can be moved. All helper imports and prompt/schema lookups resolve
 relative to the installed bundle. Node standard libraries supply the helpers;
 there are no runtime npm dependencies or runtime downloads of upstream rubrics.
 
+## OpenCode slash menu
+
+OpenCode 1.19.0 registers skills in its backend command catalogue but filters
+`source: "skill"` entries out of slash autocomplete. The skill's
+`metadata.opencode/slash` opt-in alone does not make `/hardlook` visible there.
+
+Use the bundled helper to install a standard global command:
+
+```sh
+node <skill>/scripts/hardlook.mjs install-opencode-command \
+  --dest "$HOME/.config/opencode/commands/hardlook.md"
+```
+
+For project-local scope, use `--dest .opencode/commands/hardlook.md`. The file
+must be named `hardlook.md`. It invokes the installed skill with the supplied
+arguments and retains the current agent and model. Reinstalling the same command
+is a no-op; a different existing command or symlink is preserved and reported as
+a conflict. Quit and restart OpenCode to load the command. `/skills` remains an
+alternative entrypoint for an installed skill.
+
 ## Routine review in the host
 
 Ask the current agent to use Hardlook and name the scope and intent. It loads the

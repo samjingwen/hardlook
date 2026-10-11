@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-11",
+  "harness": "opencode",
+  "harness_version": "1.19.0",
+  "scope": "standard command installation and slash-menu visibility",
+  "automated_tests": {
+    "command_installer": 5,
+    "complete_suite": 29,
+    "result": "passed"
+  },
+  "native_registration": {
+    "name": "hardlook",
+    "source": "command",
+    "hints": ["$ARGUMENTS"],
+    "installed_skill_discovered": true,
+    "result": "passed"
+  },
+  "native_tui": {
+    "surface": "regular OpenCode TUI slash autocomplete",
+    "query": "/hardlook",
+    "command_label_and_description_fragment_rendered_in_menu": true,
+    "prompt_submitted": false,
+    "result": "passed"
+  },
+  "limitations": [
+    "This setup verification did not invoke a model or perform a code review.",
+    "Existing OpenCode sessions must restart to reload newly installed commands."
+  ]
+}

@@ -13,6 +13,7 @@ const help = `Hardlook — one self-contained review skill (Node 22+, Git)
 
   hardlook.mjs doctor [--binary harness=/absolute/cli]
   hardlook.mjs install --dest <unused exact skill directory>
+  hardlook.mjs install-opencode-command --dest <commands/hardlook.md>
   hardlook.mjs context --repo <repo> --intent <intent> [scope options]
   hardlook.mjs review --repo <repo> --intent <intent> --peer <harness>[:model]
 
@@ -47,6 +48,24 @@ export async function install(destination) {
   return { installed: target, complete_bundle: true, restart_harness: true };
 }
 
+export async function installOpencodeCommand(destination) {
+  if (!destination) throw new Error('--dest is required');
+  const source = path.resolve(fileURLToPath(new URL('../', import.meta.url)));
+  const target = path.resolve(destination);
+  if (path.basename(target) !== 'hardlook.md') throw new Error('command destination must be named hardlook.md');
+  if (target.startsWith(`${source}${path.sep}`)) throw new Error('installation destination cannot be inside source bundle');
+  const template = await fs.readFile(path.join(source, 'adapters/opencode/commands/hardlook.md'), 'utf8');
+  const result = { installed: target, command: 'hardlook', source: 'command', restart_harness: true };
+  try {
+    const existing = await fs.lstat(target);
+    if (existing.isFile() && await fs.readFile(target, 'utf8') === template) return { ...result, already_installed: true };
+    throw new Error('command destination already exists');
+  } catch (error) { if (error.code !== 'ENOENT') throw error; }
+  await fs.mkdir(path.dirname(target), { recursive: true });
+  await fs.writeFile(target, template, { encoding: 'utf8', flag: 'wx' });
+  return { ...result, already_installed: false };
+}
+
 export async function main(args) {
   const { values, positionals } = parseArgs({ args, allowPositionals: true, options: {
     help: { type: 'boolean', short: 'h' }, repo: { type: 'string' }, scope: { type: 'string' }, base: { type: 'string' },
@@ -72,6 +91,7 @@ export async function main(args) {
   switch (positionals[0]) {
     case 'doctor': result = await doctor(binaryOverrides); break;
     case 'install': result = await install(values.dest); break;
+    case 'install-opencode-command': result = await installOpencodeCommand(values.dest); break;
     case 'context': result = await packet(options); break;
     case 'review': {
       const format = values.format ?? 'json';
