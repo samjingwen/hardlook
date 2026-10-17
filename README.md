@@ -1,5 +1,11 @@
 # Hardlook
 
+> [!IMPORTANT]
+> Hardlook has moved to [samjingwen/agent-toolkit](https://github.com/samjingwen/agent-toolkit).
+> This repository is archived and retained for historical reference.
+> Use the [current documentation](https://github.com/samjingwen/agent-toolkit/tree/main/docs/hardlook) and [canonical skill](https://github.com/samjingwen/agent-toolkit/tree/main/skills/hardlook) for future development, installations, and updates.
+> Existing installations continue to work.
+
 **Evidence-first code review for coding agents.**
 
 One self-contained Agent Skill: review rubrics, reviewer templates, five harness
@@ -8,7 +14,7 @@ inside the installed `hardlook` directory. No separate Ponytail, pstack, or
 thermonuclear installation; no runtime upstream prompt downloads.
 
 ```sh
-npx skills add samjingwen/hardlook --skill hardlook
+npx skills add samjingwen/agent-toolkit --skill hardlook
 ```
 
 Choose your harness in the installer, then start a new session and ask:
@@ -20,7 +26,7 @@ Choose your harness in the installer, then start a new session and ask:
 For a global OpenCode install, register the bundled slash-menu command too:
 
 ```sh
-npx skills add samjingwen/hardlook --skill hardlook --global --agent opencode
+npx skills add samjingwen/agent-toolkit --skill hardlook --global --agent opencode
 node "$HOME/.agents/skills/hardlook/scripts/hardlook.mjs" install-opencode-command \
   --dest "$HOME/.config/opencode/commands/hardlook.md"
 ```
